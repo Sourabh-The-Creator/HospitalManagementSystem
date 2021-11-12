@@ -1,0 +1,52 @@
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 75px;
+  left: 0;
+  background-color: #416ef7;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #ffffff;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 250px;
+  /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+
+ol {
+  list-style: none;
+  counter-reset: my-awesome-counter;
+}
+ol li {
+  counter-increment: my-awesome-counter;
+}
+ol li::before {
+  content: counter(my-awesome-counter) ". ";
+  color: red;
+  font-weight: bold;
+}

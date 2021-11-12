@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ public class LoginUser extends HttpServlet {
 		String i = request.getParameter("userType");
 	    String j = request.getParameter("email");
 		String k = request.getParameter("password");
+		String name,email;
 		System.out.print(i);
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -52,18 +54,37 @@ public class LoginUser extends HttpServlet {
 			
 			
 			java.sql.Statement stmt = con.createStatement();
+			
 
-		String sql = String.format("SELECT email FROM administrator WHERE email=\"%s\" AND password=\"%s\"", j,k);
+		String sql = String.format("SELECT email FROM %s WHERE email=\"%s\" AND password=\"%s\"",i,j,k);
 		  
 		
 		
 		ResultSet res =  stmt.executeQuery(sql);
 		
 		
+		
 			if(res.next())
-			{
+			{	
 				System.out.println("Verified User");
-				//response.sendRedirect("/HMS/MyHospital/forms/signIn.html"); 
+				String sql1 = String.format("SELECT admin_name,email FROM administrator WHERE email=\"%s\" AND password=\"%s\"", j,k);
+				ResultSet result =  stmt.executeQuery(sql1);
+				if(result.next())
+				{
+					name = result.getString(1);
+					email= result.getString(2);
+					request.setAttribute("name",name);
+					request.setAttribute("email",email);
+					System.out.print(request);
+					//request.getRequestDispatcher("/WEB-INF/dashboard.jsp").forward(request, response);
+					RequestDispatcher rs = request.getRequestDispatcher("/MyHospital/screens/dashboard.jsp");
+					
+					rs.forward(request, response);
+				}
+				
+				
+				
+				//response.sendRedirect("/HMS/MyHospital/screens/adminDashboard.jsp");
 			}
 			else {
 				
