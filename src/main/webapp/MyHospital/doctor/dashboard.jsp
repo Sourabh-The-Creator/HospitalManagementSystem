@@ -11,41 +11,17 @@
         }
     </style>
 
-   
+    <script>
+        var lastname = localStorage.getItem("admin_name");
+    </script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+    <link href="../MyHospital/assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/MyHospital/assets/css/sidebar.css">
-       <script>
-       adminName = '${name}'
-       adminEmail = '${email}'
-            window.onload = function(){
-        
-            //get data from storage
-                if(!localStorage.getItem('name')){
-                    localStorage.setItem('name', adminName);
-                    localStorage.setItem('email', adminEmail);
-                }
-                
-                
-            console.log(localStorage);
-            if (adminName !== null) { //if data exist (todos are in storage)
-                
-                document.getElementById('adminName').innerHTML = localStorage.getItem('name'); //2
-        
-                
-            } else { //if nothing exist in storage, keep todos array empty
-                localStorage.setItem('name', adminName);
-                localStorage.setItem('email', adminEmail);
-        
-            }
-        }
-
-        </script>
 </head>
 
-<body style="background-color: #f7f7f7ce;background-image: url('<%=request.getContextPath()%>/MyHospital/assets/img/hero-bg.jpg')" >
+<body style="background-color: #f7f7f7ce;">
 
     <nav class="navbar navbar-light bg-white">
 
@@ -68,23 +44,19 @@
             <div class="column" style="margin-right: 10px; margin-left: 10px;margin-top: 1px; margin-bottom: 20px;">
 
                 <div class="row" style="margin-top: 10px; margin-left: 2px;">
-                    <h5 id = "adminName" style="color: white;"><b>Admin</b></h5>
-                </div>
-                <div class="row" style="margin-top: 10px; margin-left: 2px;">
-                    <h5 style="color: white;"><b>Admin</b></h5>
+                    <h5 style="color: white;"><b>${name}</b></h5>
                 </div>
 
             </div>
         </div>
-      
-         <a href="/HMS/MyHospital/screens/dashboard.jsp"><i class="fa fa-fw fa-home"></i> Dashboard</a>
-        <a href="/HMS/adminProfile?name=${name}&&email=${email}"><i class="fa fa-fw fa-wrench"></i> Profile</a>
-        <a href="/HMS/viewInpatient"><i class="fa fa-fw fa-user"></i> Inpatients Book</a>
-        <a href="/HMS/viewOutpatient"><i class="fa fa-fw fa-user"></i> Outpatients Book</a>
+        <a href="/HMS/MyHospital/screens/dashboard.jsp"><i class="fa fa-fw fa-home"></i> Dashboard</a>
+        <a href="/HMS/MyHospital/screens/profile.jsp"><i class="fa fa-fw fa-wrench"></i> Profile</a>
+        <a href="/HMS/MyHospital/screens/inpatient.jsp"><i class="fa fa-fw fa-user"></i> Inpatients Book</a>
+        <a href="/HMS/MyHospital/screen/outpatient.jsp"><i class="fa fa-fw fa-user"></i> Outpatients Book</a>
         <a href="/HMS/MyHospital/screens/addDoctor.jsp"><i class="fa fa-fw fa-envelope"></i> Add Doctors</a>
         <a href="/HMS/MyHospital/screens/addStaff.jsp"><i class="fa fa-fw fa-envelope"></i> Add Staff Member</a>
-        <a href="/HMS/viewStaff"><i class="fa fa-fw fa-envelope"></i>Staff Book</a>
-        <a href="/HMS/viewDoctor"><i class="fa fa-fw fa-envelope"></i>Doctors Book</a>
+        <a href="/HMS/MyHospital/screens/staffBook.jsp"><i class="fa fa-fw fa-envelope"></i>Staff Book</a>
+        <a href="/HMS/MyHospital/screens/doctorBook.jsp"><i class="fa fa-fw fa-envelope"></i>Doctors Book</a>
     </div>
 
     <div class="main">
@@ -99,12 +71,12 @@
                             <h5 style="color: #4b6ed8;" class="card-title"><b>Doctors</b></h5>
                         </div>
                         <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Dcount}</b></h1>
+                            <h1 style="color: red;"><b>1</b></h1>
                         </div>
 
                         <div class="card-body" style="text-align: center;">
 
-                            <a href="/HMS/viewDoctor" class="card-link">View &#x2192</a>
+                            <a href="#" class="card-link">View &#x2192</a>
                         </div>
                     </div>
                 </div>
@@ -116,12 +88,12 @@
                             <h5 style="color: #4b6ed8;" class="card-title"><b>Staff Members</b></h5>
                         </div>
                         <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Scount}</b></h1>
+                            <h1 style="color: red;"><b>1</b></h1>
                         </div>
 
                         <div class="card-body" style="text-align: center;">
 
-                            <a href="/HMS/viewStaff" class="card-link">View &#x2192</a>
+                            <a href="#" class="card-link">View &#x2192</a>
                         </div>
                     </div>
                 </div>
@@ -133,12 +105,12 @@
                             <h5 style="color: #4b6ed8;" class="card-title"><b>Inpatients</b></h5>
                         </div>
                         <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Incount}</b></h1>
+                            <h1 style="color: red;"><b>1</b></h1>
                         </div>
 
                         <div class="card-body" style="text-align: center;">
 
-                            <a href="/HMS/viewInpatient" class="card-link">View &#x2192</a>
+                            <a href="#" class="card-link">View &#x2192</a>
                         </div>
                     </div>
                 </div>
@@ -152,12 +124,12 @@
                             <h5 style="color: #4b6ed8;" class="card-title"><b>Outpatients</b></h5>
                         </div>
                         <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Outcount}</b></h1>
+                            <h1 style="color: red;"><b>1</b></h1>
                         </div>
 
                         <div class="card-body" style="text-align: center;">
 
-                            <a href="/HMS/viewOutpatient" class="card-link">View &#x2192</a>
+                            <a href="#" class="card-link">View &#x2192</a>
                         </div>
                     </div>
                 </div>
@@ -170,12 +142,12 @@
                             <h5 style="color: #4b6ed8;" class="card-title"><b>Doctors</b></h5>
                         </div>
                         <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Dcount}</b></h1>
+                            <h1 style="color: red;"><b>1</b></h1>
                         </div>
 
                         <div class="card-body" style="text-align: center;">
 
-                            <a href="/HMS/viewDoctor" class="card-link">View &#x2192</a>
+                            <a href="#" class="card-link">View &#x2192</a>
                         </div>
                     </div>
                 </div>
