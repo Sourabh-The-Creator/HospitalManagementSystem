@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddDoctor
+ * Servlet implementation class addStaff
  */
-@WebServlet("/AddDoctor")
-public class AddDoctor extends HttpServlet {
+@WebServlet("/addStaff")
+public class addStaff extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddDoctor() {
+    public addStaff() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,9 +35,10 @@ public class AddDoctor extends HttpServlet {
 		String user = "root";
 		String pswd = "password@123";
 		String url = "jdbc:mysql://localhost:3306/hospital";
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -54,34 +54,36 @@ public class AddDoctor extends HttpServlet {
 			
 
 		//String sql = String.format("insert into Doctor values(?,?,?,?,?,?)");
-		PreparedStatement stmt = con.prepareStatement("insert into Doctor values(?,?,?,?,?,?)");
+		PreparedStatement stmt = con.prepareStatement("insert into Staff values(?,?,?,?,?)");
 		 int id1 = 101;
+		 int admin_id1=2;
 		 String id = request.getParameter("id");
+		 String admin_id = request.getParameter("id");
 		   
-		
-		int admin = 3;
 		if(id!=null)
 		{
 		    id1 = Integer.parseInt(id);
+		}
+		if(admin_id!=null)
+		{
+		    admin_id1 = Integer.parseInt(id);
 		}
 		
 		 stmt.setInt(1, Integer.valueOf(id1));
 		 stmt.setString(2,request.getParameter("name"));    
 		 stmt.setString(3,request.getParameter("email")); 
-		 stmt.setString(4,"Sourabh@1234");
-		 stmt.setString(5,request.getParameter("dept"));     
-		 stmt.setInt(6, Integer.valueOf(admin));
+		 stmt.setString(4,request.getParameter("password"));
+		 stmt.setInt(5, 2);
 		 int res = stmt.executeUpdate();
-		 
+		    out.println("<script type=\"text/javascript\">");  
+			out.println("location='/HMS/viewStaff';");
+			out.println("</script>");
 		
 		
 		
 			if(res > 0)
 			{
-				out.println("<script type=\"text/javascript\">");  
-				out.println("alert('Add Successful');");
-				out.println("location='/HMS/viewDoctor';");
-				out.println("</script>");
+				System.out.println("Verified User");
 				 
 			}
 			else {
@@ -103,7 +105,6 @@ public class AddDoctor extends HttpServlet {
 		}
 	}
 
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
