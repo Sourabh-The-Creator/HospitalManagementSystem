@@ -1,11 +1,10 @@
-
+package doctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class viewOutpatient
+ * Servlet implementation class doctorProfile
  */
-@WebServlet("/viewOutpatient")
-public class viewOutpatient extends HttpServlet {
+@WebServlet("/doctorProfile")
+public class doctorProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public viewOutpatient() {
+    public doctorProfile() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,10 +36,14 @@ public class viewOutpatient extends HttpServlet {
 		String user = "root";
 		String pswd = "password@123";
 		String url = "jdbc:mysql://localhost:3306/hospital";
+		String name,email,id,dept,admin_id;
+		String j = request.getParameter("email");
+		String i = request.getParameter("name");
+		
 		PrintWriter out = response.getWriter();
-		String loc = request.getParameter("location");
-		ArrayList outpatientList = new ArrayList(); 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -52,32 +55,38 @@ public class viewOutpatient extends HttpServlet {
 			
 			
 			
+			System.out.print(i+" "+j);
 			java.sql.Statement stmt = con.createStatement();
 			
-
-		String sql = String.format("SELECT patient_id,lab_no,date,amount FROM outpatient");
-		ResultSet res =  stmt.executeQuery(sql);
-			if(res.next())
-			{	
-				 while(res.next()) {
-					 outpatientList.add(res.getInt("patient_id"));
-					 outpatientList.add(res.getInt("lab_no"));
-					 outpatientList.add(res.getString("date"));
-					 outpatientList.add(res.getInt("amount"));
-					  
-				 }
-			}
-			else {
-				
-				
-				out.println("<script type=\"text/javascript\">");  
-				out.println("alert('No Inpatient Added yet');");
-				out.println("location='/HMS/MyHospital/screens/inpatient.jsp';");
-				out.println("</script>");
-				
-			//	response.sendRedirect("");
-				
-			}
+			String sql = String.format("SELECT doctor_id,doctor_name,email,dept,admin_id FROM Doctor WHERE email=\"%s\" AND doctor_name=\"%s\"", j,i);
+		
+		  
+		
+		
+		ResultSet result =  stmt.executeQuery(sql);
+		if(result.next())
+		{	
+			id = result.getString(1);
+			name= result.getString(2);
+			dept = result.getString(3);
+			email= result.getString(4);
+			request.setAttribute("name",name);
+			request.setAttribute("email",email);
+			request.setAttribute("id",id);
+			request.setAttribute("dept",dept);
+			 
+		}
+		else {
+			
+			
+			out.println("<script type=\"text/javascript\">");  
+			out.println("alert('No staff Added yet');");
+			out.println("location='/HMS/MyHospital/doctor/dashboard.jsp';");
+			out.println("</script>");
+			
+		//	response.sendRedirect("");
+			
+		}
 		
 		}catch(Exception e)
 		{
@@ -85,24 +94,14 @@ public class viewOutpatient extends HttpServlet {
 			System.out.println(e);
 		}
 		
-		 request.setAttribute("outpatientList", outpatientList);
 
-		 if(loc.equals("Doctor")) {
-			 RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/doctor/viewOutpatient.jsp");
-			 if (dispatcher != null){
+		  RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/doctor/profile.jsp");
 
-				  dispatcher.forward(request, response);
+		  if (dispatcher != null){
 
-				  } 
-		 }
-		 else if(loc.equals("Administartor")) {
-			 RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/screens/outpatient.jsp");
-			 if (dispatcher != null){
+		  dispatcher.forward(request, response);
 
-				  dispatcher.forward(request, response);
-
-				  } 
-		 }
+		  } 
 	}
 
 	/**
