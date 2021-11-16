@@ -26,22 +26,27 @@
             padding-top: 12px;
         }
 
-        #navbar {
-            display: flex;
-            align-items: center;
-            position: relative;
-            top: -8px;
-            right: 15px;
-            background-color: cornsilk;
-            height: 100%;
-            width: 104%;
-            z-index: -1;
-            opacity: 1;
-        }
+        .navbar {
+                width: 100%;
+                position: fixed;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem 1 rem;
+                overflow: hidden;
+            }
 
-        body {
-            font-family: "Lato", sans-serif;
-        }
+            body {
+                    font-family: "Lato", sans-serif;
+                    overflow-x: hidden;
+                    background-image: url("<%=request.getContextPath()%>/MyHospital/assets/img/hero-bg.jpg");
+                    background-repeat: no-repeat;
+                    background-position: right top;
+                    background-attachment: fixed;
+                    font-family: "Lato", sans-serif;
+
+            }
 
         .sidebar {
             height: 100%;
@@ -142,6 +147,10 @@
     </style>
 
     <script>
+		    function callDashboard(){
+		 	   var email =  localStorage.getItem('email');
+		        location.href = "/HMS/dashboard?email="+email+"&&userType=Administrator" //2
+		    }
         // function validateForm() {
         //     let x = document.forms["addDoctor"]["name"].value;
         //     let y = document.forms["addDoctor"]["phone"].value;
@@ -155,14 +164,14 @@
 
 <body style="background-color: #dfdfdf9c;">
 
-    <nav class="navbar navbar-light bg-white">
+     <nav class="navbar navbar-light bg-white fixed-top" id="navbar">
 
-        <h1 class="logo me-auto" style="margin-left:0px;"> <img src="../assets/img/Dashboard/logo.png"
-                alt="hospital.com" height="50px" width="50px"> <a class="navbar-brand" href="#">Medilab</h1>
-        <form class="form-inline">
-            <button class="btn btn-outline-success" type="button">Log Out</button>
-        </form>
-    </nav>
+            <h1 class="logo me-auto" style="margin-left:0px;"> <img src="<%=request.getContextPath()%>/MyHospital/assets/img/Dashboard/logo.png"
+                    alt="hospital.com" height="50px" width="50px"> <a class="navbar-brand" href="#">Medilab</h1>
+            <form class="form-inline">
+                <button  onClick="location.href='/HMS/MyHospital/'" class="btn btn-outline-success" type="button">Log Out</button>
+            </form>
+        </nav>
 
     <div class="sidebar">
         <div class="row" style="width: 500px; height: 100px;">
@@ -182,10 +191,10 @@
                 </div>
             </div>
         </div>
-         <a href="/HMS/MyHospital/screens/dashboard.jsp"><i class="fa fa-fw fa-home"></i> Dashboard</a>
-        <a href="/HMS/adminProfile"><i class="fa fa-fw fa-wrench"></i> Profile</a>
-        <a href="/HMS/viewInpatient"><i class="fa fa-fw fa-user"></i> Inpatients Book</a>
-        <a href="/HMS/viewOutpatient"><i class="fa fa-fw fa-user"></i> Outpatients Book</a>
+         <a href="javascript:callDashboard()"><i class="fa fa-fw fa-home"></i> Dashboard</a>
+        <a href="/HMS/MyHospital/screens/profile.jsp"><i class="fa fa-fw fa-wrench"></i> Profile</a>
+        <a href="/HMS/viewInpatient?location=Administartor"><i class="fa fa-fw fa-user"></i> Inpatients Book</a>
+        <a href="/HMS/viewOutpatient?location=Administartor"><i class="fa fa-fw fa-user"></i> Outpatients Book</a>
         <a href="/HMS/MyHospital/screens/addDoctor.jsp"><i class="fa fa-fw fa-envelope"></i> Add Doctors</a>
         <a href="/HMS/MyHospital/screens/addStaff.jsp"><i class="fa fa-fw fa-envelope"></i> Add Staff Member</a>
         <a href="/HMS/viewStaff"><i class="fa fa-fw fa-envelope"></i>Staff Book</a>

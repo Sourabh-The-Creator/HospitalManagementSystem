@@ -143,6 +143,28 @@ Licensed under MIT
                 min-height: 450px;
             }
         </style>
+         <script>
+         function callDashboard(){
+      	   var email =  localStorage.getItem('email');
+             location.href = "/HMS/dashboard?email="+email+"&&userType=Administrator" //2
+         }
+        window.onload = function(){
+        	
+        console.log(localStorage);
+        if (localStorage.getItem('name')) { //if data exist (todos are in storage)
+            
+            document.getElementById('admin_name').innerHTML = localStorage.getItem('name'); //2
+            document.getElementById('admin_email').innerHTML = localStorage.getItem('email'); //2
+            document.getElementById('admin_id').innerHTML = localStorage.getItem('admin_id'); //2
+            document.getElementById('gender').innerHTML = localStorage.getItem('gender'); //2
+     
+            
+        } else { //if nothing exist in storage, keep todos array empty
+            name = "Admin";
+        }
+        }
+
+        </script>
     </head>
 
     <body style="background-image: url('<%=request.getContextPath()%>/MyHospital/assets/img/hero-bg.jpg')">
@@ -165,23 +187,23 @@ Licensed under MIT
                                 <!-- END SIDEBAR USERPIC -->
                                 <!-- SIDEBAR USER TITLE -->
                                 <div class="profile-usertitle">
-                                    <div class="profile-usertitle-name">${name}</div>
+                                    <div  class="profile-usertitle-name"><span id = "admin_name">admin_name</span></div>
                                     <div class="profile-usertitle-job">Administrator</div>
                                 </div>
                                 <!-- END SIDEBAR USER TITLE -->
                                 <div class="profile-usermenu">
                                     <ul class="nav">
-                                        <li><a href="# "><i class="glyphicon glyphicon-envelope">  ${email}</i></a></li>
-                                        <li><a href="# "><i class="glyphicon glyphicon-tag"></i> ID:  ${id}</a></li>
+                                        <li ><a href="# "> <i class="glyphicon glyphicon-envelope"></i> <span  id="admin_email">admin_email</span></a></li>
+                                        <li ><a href="# "><i class="glyphicon glyphicon-tag"> </i> ID: <span id="admin_id"> admin_id </span></a></li>
                                         <!-- <li><a href="# " target="_blank "><i class="glyphicon glyphicon-ok "></i>Tasks </a></li> -->
-                                        <li><a href="# "><i class="glyphicon glyphicon-user ">  ${gender}</i></a></li>
+                                        <li ><a href="# "> <i class="glyphicon glyphicon-user "></i><span id="gender">gender</span></a></li>
                                     </ul>
                                 </div>
                                 <!-- END MENU -->
                                 <!-- SIDEBAR BUTTONS -->
                                 <div class="profile-userbuttons">
                                     <button type="button " class="btn-success btn-sm text-white" style="margin-right:20px;">Edit</button>
-                                    <button type="button " class="btn-danger btn-sm text-white" style="margin-left:20px;" onclick=location.href="${pageContext.request.contextPath}/MyHospital/screens/dashboard.jsp">Close</button>
+                                    <button type="button " class="btn-danger btn-sm text-white" style="margin-left:20px;" onclick="javascript:callDashboard()">Close</button>
                                 </div>
                                 <!-- END SIDEBAR BUTTONS -->
                                 <!-- SIDEBAR MENU -->

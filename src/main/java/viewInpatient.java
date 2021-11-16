@@ -38,6 +38,7 @@ public class viewInpatient extends HttpServlet {
 		String user = "root";
 		String pswd = "password@123";
 		String url = "jdbc:mysql://localhost:3306/hospital";
+		String loc = request.getParameter("location");
 		PrintWriter out = response.getWriter();
 		ArrayList inpatientList = new ArrayList(); 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -90,14 +91,25 @@ public class viewInpatient extends HttpServlet {
 		}
 		
 		 request.setAttribute("inpatientList", inpatientList);
+		 if(loc.equals("Doctor")) {
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/doctor/viewInpatient.jsp");
+			 if (dispatcher != null){
 
-		  RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/screens/inpatient.jsp");
+				  dispatcher.forward(request, response);
 
-		  if (dispatcher != null){
+				  } 
+		 }
+		 else if(loc.equals("Administartor")) {
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("/MyHospital/screens/inpatient.jsp");
+			 if (dispatcher != null){
 
-		  dispatcher.forward(request, response);
+				  dispatcher.forward(request, response);
 
-		  } 
+				  } 
+		 }
+		  
+
+		  
 		
 	}
 
