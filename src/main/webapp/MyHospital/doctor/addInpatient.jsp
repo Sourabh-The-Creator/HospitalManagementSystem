@@ -238,7 +238,7 @@
                 <div class="text-block ">
                     <div class="form ">
                         <label for="name "><b>Patient's Name:</b></label>
-                        <input type="text " name="name" id="name" placeholder="Enter Name ">
+                        <input type="text " name="name" id="name" placeholder="Enter Name " pattern="[A-Za-z]" title="Enter the valid name">
                     </div>
                     <div class="form">
                         <label for="id"><b>Patient's id:</b></label>
@@ -254,7 +254,7 @@
                     </div>
                     <div class="form ">
                         <label for="disease"><b>Disease Name:</b></label>
-                        <input type="text " name="disease" id="disease" placeholder="Enter name of disease ">
+                        <input type="text " name="disease" id="disease" placeholder="Enter name of disease " pattern="[A-Za-z]" ">
                     </div>
                     <div class="form" style="margin-top: 0px;">
                         <label for="gender"><b>Gender:</b></label>

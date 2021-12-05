@@ -209,23 +209,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="column" style="margin-right: 10px; margin-left: 10px;margin-top: 10px; margin-bottom: 5px;"
-                    style="margin-left: 0px; margin-right: 400px;">
-
-                    <div class="card" style="width: 15rem;height: 12rem;">
-
-                        <div class="card-body" style="text-align: center;">
-                            <h5 style="color: #4b6ed8;" class="card-title"><b>Doctors</b></h5>
-                        </div>
-                        <div style="text-align: center;">
-                            <h1 style="color: red;"><b>${Outcount}</b></h1>
-                        </div>
-
-                        <div class="card-body" style="text-align: center;">
-
-                            <a href="/HMS/viewDoctor" class="card-link">View &#x2192</a>
-                        </div>
-                    </div>
                 </div>
 
 

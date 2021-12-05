@@ -210,7 +210,7 @@
 
                     <div class="form">
                         <label for="name"><b>Doctor's Name:</b></label>
-                        <input type="text" name="name" id="name" placeholder="Enter Name">
+                        <input type="text" name="name" id="name" placeholder="Enter Name" pattern="[A-Za-z]" title="Enter the valid name">
                     </div>
 
                     <div class="form">
